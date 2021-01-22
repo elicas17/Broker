@@ -1,14 +1,10 @@
 window.onload =()=>{
-    // localStorage
-    // localStorage.nombre = document.getElementById("nombre").value;
-
-    // datosUsusario
-    nombre=document.getElementById("nombre").innerHTML;
+   
     // tiempo 
     m=0;
     s=0;
     document.getElementById("tiempo").innerHTML="00:00";
-    document.getElementById("empezar").addEventListener("click",cronometrar);
+    document.getElementById("empezar").addEventListener("click",cronometrar,false);
     
     // accion
     accion=100.00;
@@ -19,16 +15,19 @@ window.onload =()=>{
     cantidadAccion=0;
     document.getElementById("capital").innerHTML=1000.00;
     var comprar=document.getElementById("comprar");
-    comprar.addEventListener('click',comprarAccion);
+    comprar.addEventListener('click',comprarAccion,false);
     var vender=document.getElementById("vender");
-    vender.addEventListener('click',venderAccion);
+    vender.addEventListener('click',venderAccion,false);
 
     // funciones
     // cronometrar();
 };
 function cronometrar(){ 
-    if(nombre.trim.length>0){
-        localStorage.setItem("titulo", "Curso de Angular avanzado - Víctor Robles");
+    
+    almacenarNombre();
+    var nom=document.getElementById("nombre").value;
+    if(nom.length>0){
+        localStorage.setItem("nombre", document.getElementById("nombre").value);
         document.getElementById("empezar").disabled=true;
         escribir();
         id=setInterval(escribir,1000);
@@ -37,6 +36,13 @@ function cronometrar(){
     }
     
 };
+function almacenarNombre(){
+     // localStorage NO ACABADOOOOOOOOOOOOOOOOOOO
+     nom=document.getElementById("nombre").value;
+     var misnombre={nombre:+nom}
+     localStorage.getItem("nombre");
+ 
+}
 function comprarAccion(){
 
     capital=capital-accion;
@@ -96,6 +102,6 @@ function escribir(){
             document.getElementById("capital").innerHTML="1000.00";
         }
     }else{
-        document.getElementById("mensajeFinal").innerHTML=nombre+" Te has quedado sin efectivo";
+        document.getElementById("mensajeFinal").innerHTML=document.getElementById("nombre").value+", te has quedado sin efectivo";
     }
 };

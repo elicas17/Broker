@@ -8,8 +8,11 @@
     <link rel="stylesheet" type="styles/juego.css">
 </head>
 <body  onload="recargarHora()">
-    <  div class="principal" >
-		<input type="text" id="nombre" placeholder="Ingresa tu nombre">
+    <div class="principal" >
+        <input list="nombres" type="text" id="nombre" placeholder="Ingresa tu nombre">
+        <datalist id="nombres">
+                <option >hola</option>
+        </datalist>
         <button id="empezar">empezar</button> 
     </div>
     <div id="cuerpo">
@@ -18,15 +21,23 @@
         </div>
 
         <div class="c-usuario">
-            <div class="acciones">
+            <div class="c-accion">
                 <p>Acciones:</p>
                 <p id="accion"></p>
             </div>
             <div class="usuario">
-                <p>Capital:</p>
-                <p id="capital"></p>
-                <p>Nº de acciones:</p>
-                <p id="nAccion"></p>
+                <div class="c-capital">
+                    <label>Capital:</label>
+                    <p id="capital"></p>
+                </div>
+                <div class="c-nacciones">
+                    <label>Nº de acciones:</label>
+                    <p id="nAccion"></p>
+                </div>
+                <div class="c-total">
+                    <label>Total</label>
+                    <p id="total"></p>
+                </div>
                 <button id="comprar">Comprar</button>
                 <button id="vender">Vender</button>
             </div>
