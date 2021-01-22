@@ -1,27 +1,85 @@
-window.onload = load();
-function load(){
+window.onload =()=>{
+    // localStorage
+    // localStorage.nombre = document.getElementById("nombre").value;
 
 
-    var fechaHora = new Date();
-    document.getElementById("tiempo").innerHTML = fechaHora.getHours() +":"+fechaHora.getMinutes()+":"+fechaHora.getSeconds();
 
+    // tiempo 
+    m=0;
+    s=0;
+    document.getElementById("tiempo").innerHTML="00:00";
+    document.getElementById("empezar").addEventListener("click",cronometrar);
+    // accion
+    accion=100.00;
+    document.getElementById("accion").innerHTML=100.00;
 
-    var tiempoInicio=fechaHora.getHours() +":"+fechaHora.getMinutes()+":"+fechaHora.getSeconds();
-    console.log(tiempoInicio)
-
-
+    // capital
+    capital=1000.00;
+    cantidadAccion=0;
+    document.getElementById("capital").innerHTML=1000.00;
     var comprar=document.getElementById("comprar");
+    comprar.addEventListener('click',comprarAccion);
     var vender=document.getElementById("vender");
-    var acciones=document.getElementById("capital").innerHTML;
-    var capital=document.getElementById("capital").innerHTML;
-    
-    comprar.addEventListener('click',function(){
-        capital=parseFloat(capital)+parseFloat(acciones);
+    vender.addEventListener('click',venderAccion);
+
+    // funciones
+    // cronometrar();
+};
+function cronometrar(){
+    escribir();
+    setInterval(escribir,1000);
+    document.getElementById("empezar").addEventListener("click",cronometrar);
+};
+function comprarAccion(){
+
+    capital=capital-accion;
+    cantidadAccion++;
+    document.getElementById("capital").innerHTML=capital;
+    document.getElementById("nAccion").innerHTML=cantidadAccion;
+}
+function venderAccion(){
+    capital=capital+accion;
+    cantidadAccion--;
+    document.getElementById("capital").innerHTML=capital;
+    document.getElementById("nAccion").innerHTML=cantidadAccion;
+}
+function escribir(){
+    if(m<=3){
+        var maux,saux;
+        s++;
+        if(s>59){
+            m++;
+            s=0;
+        }
+        if(s<10){ saux="0"+s; }else{ saux=s; }
+        if(m<10){ maux="0"+m; }else{ maux=m; }
+        document.getElementById("tiempo").innerHTML=maux+":"+saux;
         
-        console.log(capital);
-    })
-    
-    
+        // acciones
+        accionAnterior=accion;
 
-
+        if(s%5==0){
+            if(accion>0){
+                var minimo=(accion/2);
+                if(minimo<0){
+                    minimo=0;
+                }
+                var maximo=(accion+minimo);
+                var nAle= Math.random()*((maximo)-(minimo)+1)+(minimo);
+                accion=nAle; 
+                
+            }else{
+            console.log("accion no puede se nunca negativo, problema!!!!")
+            }
+            accionPosterior=accion;
+            colorAccion = document.getElementById("accion");
+            if(accionPosterior>accionAnterior){   
+                colorAccion.style.setProperty("background-color", "#6ab150");     
+            }else{
+                colorAccion.style.setProperty("background-color", "red");
+            }
+            document.getElementById("accion").innerHTML=accion;
+            
+        } 
+    }  
 };
