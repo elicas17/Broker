@@ -58,30 +58,13 @@ function venderAccion(){
 }
 function escribir(){ 
     if(capital>0){
-        if(s<=10){
-            var maux,saux;
-            s++;
-            if(s>59){
-                m++;
-                s=0;
-            }
-            if(s<10){ saux="0"+s; }else{ saux=s; }
-            if(m<10){ maux="0"+m; }else{ maux=m; }
-            document.getElementById("tiempo").innerHTML=maux+":"+saux;
-            
+        if(s<=30){
+            contador();
             // acciones
             accionAnterior=accion;
-
             if(s%5==0){
                 if(accion>0){
-                    var minimo=(accion/2);
-                    if(minimo<0){
-                        minimo=0;
-                    }
-                    var maximo=(accion+minimo);
-                    var nAle= Math.random()*((maximo)-(minimo)+1)+(minimo);
-                    accion=nAle; 
-                    
+                    aleatorioAccion();
                 }else{
                 console.log("accion no puede se nunca negativo, problema!!!!")
                 }
@@ -105,3 +88,25 @@ function escribir(){
         document.getElementById("mensajeFinal").innerHTML=document.getElementById("nombre").value+", te has quedado sin efectivo";
     }
 };
+function contador(){
+    var maux,saux;
+    s++;
+    if(s>59){
+        m++;
+        s=0;
+    }
+    if(s<10){ saux="0"+s; }else{ saux=s; }
+    if(m<10){ maux="0"+m; }else{ maux=m; }
+    document.getElementById("tiempo").innerHTML=maux+":"+saux;
+
+}
+function aleatorioAccion(){
+    var minimo=(accion/2);
+    if(minimo<0){
+        minimo=0;
+    }
+    var maximo=(accion+minimo);
+    var nAle= Math.random()*((maximo)-(minimo)+1)+(minimo);
+    accion=nAle; 
+                    
+}
