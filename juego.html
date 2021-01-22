@@ -8,33 +8,33 @@
     <link rel="stylesheet" type="styles/juego.css">
 </head>
 <body  onload="recargarHora()">
-    <div class="principal" >
-        <form action="">
-			<input type="text" placeholder="Ingresa tu nombre">
-       		<button id="empezar">Empezar</button>
-        </form>
-	</div>
-    <div class="c-cronometro">
-        <div id="tiempo"></div>      
+    <  div class="principal" >
+		<input type="text" id="nombre" placeholder="Ingresa tu nombre">
+        <button id="empezar">empezar</button> 
     </div>
-
-    <div class="c-usuario">
-        <div class="acciones">
-            <p>Acciones:</p>
-            <p id="accion"></p>
+    <div id="cuerpo">
+        <div class="c-cronometro">
+            <div id="tiempo"></div>      
         </div>
-        <div class="usuario">
-            <p>Capital:</p>
-            <p id="capital"></p>
-            <p>Nº de acciones:</p>
-            <p id="nAccion"></p>
-            <button id="comprar">Comprar</button>
-            <button id="vender">Vender</button>
+
+        <div class="c-usuario">
+            <div class="acciones">
+                <p>Acciones:</p>
+                <p id="accion"></p>
+            </div>
+            <div class="usuario">
+                <p>Capital:</p>
+                <p id="capital"></p>
+                <p>Nº de acciones:</p>
+                <p id="nAccion"></p>
+                <button id="comprar">Comprar</button>
+                <button id="vender">Vender</button>
+            </div>
         </div>
     </div>
-
-
-    
-<script src="js/juego.js"></script>
+    <div class="c-final">
+        <p id="mensajeFinal"></p>
+    </div>
+    <script src="js/juego.js"></script>
 </body>
 </html>
