@@ -60,9 +60,10 @@ function escribir(){
     if(capital>0){
         if(s<=30){
             contador();
-            // acciones
-            accionAnterior=accion;
+
+            // comparacion de accion anterio para saber si ha subido o bajado
             if(s%5==0){
+                accionAnterior=accion;
                 if(accion>0){
                     aleatorioAccion();
                 }else{
@@ -76,13 +77,9 @@ function escribir(){
                     colorAccion.style.setProperty("background-color", "red");
                 }
                 document.getElementById("accion").innerHTML=accion;
-                
             } 
         }else{
-            clearInterval(id);
-            document.getElementById("tiempo").innerHTML="00:00";
-            document.getElementById("accion").innerHTML="100";
-            document.getElementById("capital").innerHTML="1000.00";
+            puntoInicial();
         }
     }else{
         document.getElementById("mensajeFinal").innerHTML=document.getElementById("nombre").value+", te has quedado sin efectivo";
@@ -107,6 +104,11 @@ function aleatorioAccion(){
     }
     var maximo=(accion+minimo);
     var nAle= Math.random()*((maximo)-(minimo)+1)+(minimo);
-    accion=nAle; 
-                    
+    accion=nAle;                 
+}
+function puntoInicial(){
+    clearInterval(id);
+    document.getElementById("tiempo").innerHTML="00:00";
+    document.getElementById("accion").innerHTML="100";
+    document.getElementById("capital").innerHTML="1000.00";
 }
