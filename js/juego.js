@@ -58,7 +58,7 @@ function venderAccion(){
 }
 function escribir(){ 
     if(capital>0){
-        if(s<=30){
+        if(m<=1){
             contador();
 
             // comparacion de accion anterio para saber si ha subido o bajado
