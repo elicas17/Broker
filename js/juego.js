@@ -56,6 +56,8 @@ function venderAccion(){
     document.getElementById("capital").innerHTML=capital;
     document.getElementById("nAccion").innerHTML=cantidadAccion;
 }
+
+// ESCRIBIR Y SUS FUNCIONES ////////////////////////////////////////////////
 function escribir(){ 
     if(capital>0){
         if(s<=30){
