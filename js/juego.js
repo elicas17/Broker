@@ -19,6 +19,14 @@ window.onload =()=>{
     var vender=document.getElementById("vender");
     vender.addEventListener('click',venderAccion,false);
 
+    //numero acciones
+    naccion=document.getElementById("nAccion").innerHTML;
+    nacciones=document.getElementById("accionexiste");
+
+    //total
+   document.getElementById("total").innerHTML="0";
+   total=document.getElementById("total").innerHTML;
+
     // funciones
     // cronometrar();
 };
@@ -51,16 +59,26 @@ function comprarAccion(){
     document.getElementById("nAccion").innerHTML=cantidadAccion;
 }
 function venderAccion(){
-    capital=capital+accion;
-    cantidadAccion--;
-    document.getElementById("capital").innerHTML=capital;
-    document.getElementById("nAccion").innerHTML=cantidadAccion;
+    if(naccion>0){
+        nacciones.style.display="none";
+        capital=capital+accion;
+        cantidadAccion--;
+        document.getElementById("capital").innerHTML=capital;
+        document.getElementById("nAccion").innerHTML=cantidadAccion;
+
+    }else if(naccion<=0){
+        nacciones.style.display="block";
+        nacciones.innerHTML="no tienes acciones que vender";
+        nacciones.style.color="red";
+    }
+
+
 }
 
 // ESCRIBIR Y SUS FUNCIONES ////////////////////////////////////////////////
 function escribir(){ 
     if(capital>0){
-        if(s<=30){
+        if(m<=1){
             contador();
 
             // comparacion de accion anterio para saber si ha subido o bajado
