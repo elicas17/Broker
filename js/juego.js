@@ -109,12 +109,14 @@ function almacenarNombre(){
 // ESCRIBIR Y SUS FUNCIONES ////////////////////////////////////////////////
 function escribir(){ 
     if(capital>0){
-        if(m<=1){
+        if(s<=20){
             contador();
-            
+
             document.getElementById("total").innerHTML=capital-1000;
+
+
             // comparacion de accion anterio para saber si ha subido o bajado
-            if(s%5==0){
+            if(s%2==0){
                 accionAnterior=accion;
                 if(accion>0){
                     aleatorioAccion();
@@ -140,6 +142,7 @@ function escribir(){
 function contador(){
     var maux,saux;
     s++;
+
     if(s>59){
         m++;
         s=0;
@@ -163,4 +166,8 @@ function puntoInicial(){
     document.getElementById("tiempo").innerHTML="00:00";
     document.getElementById("accion").innerHTML="100";
     document.getElementById("capital").innerHTML="1000.00";
+    document.getElementById("nAccion").innerHTML="0";
+    document.getElementById("total").innerHTML="0";
+    document.getElementById("vender").disabled=false;
+    document.getElementById("comprar").disabled=false;
 }
