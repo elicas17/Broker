@@ -4,7 +4,17 @@ window.onload =()=>{
      if(localStorage.datosUsu==undefined){
          localStorage.setItem("datosUsu",JSON.stringify([]));
      }
-   
+
+     ar=JSON.parse(localStorage.getItem("datosUsu"));
+     puntos=0;
+    for (x of ar) {
+        if(x.puntos>=puntos){
+            puntos=x.puntos; 
+            document.getElementById("localNom").innerHTML=x.nombre;
+        }
+        }
+    
+
     // tiempo 
     m=0;
     s=0;
@@ -15,6 +25,11 @@ window.onload =()=>{
     accion=100.00;
     document.getElementById("accion").innerHTML=100.00;
 
+    //numero acciones
+    document.getElementById("nAccion").innerHTML=0;
+    naccion=document.getElementById("nAccion").innerHTML;
+    
+
     // capital
     capital=1000.00;
     cantidadAccion=0;
@@ -23,24 +38,17 @@ window.onload =()=>{
     comprar.addEventListener('click',comprarAccion,false);
     var vender=document.getElementById("vender");
     vender.addEventListener('click',venderAccion,false);
-
-    //numero acciones
-    document.getElementById("nAccion").innerHTML=0;
-    naccion=document.getElementById("nAccion").innerHTML;
-    nacciones=document.getElementById("accionexiste");
-
+    
     //total
    document.getElementById("total").innerHTML="0";
    total=document.getElementById("total").innerHTML;
 
     // funciones
-    // cronometrar();
+
 };
 function cronometrar(){ 
-    
-    almacenarNombre();
-     
-    if(document.getElementById("nombre").value.length>0){  
+    if(document.getElementById("nombre").value.length>0){ 
+        almacenarNombre();
         document.getElementById("empezar").disabled=true;
         escribir();
         id=setInterval(escribir,1000);
@@ -49,8 +57,37 @@ function cronometrar(){
     }
     
 };
-function almacenarNombre(){
+function comprarAccion(){
+
+    if(capital>0){
+        document.getElementById("comprar").disabled=false;
+        capital=capital-accion;
+        cantidadAccion++;
+        document.getElementById("capital").innerHTML=capital;
+        document.getElementById("nAccion").innerHTML=cantidadAccion;
+    }else{
+        document.getElementById("comprar").disabled=true;
+    }
    
+}
+function venderAccion(){
+
+    if(cantidadAccion>0){
+       
+        capital=capital+accion;
+        cantidadAccion--;
+        document.getElementById("capital").innerHTML=capital;
+        document.getElementById("nAccion").innerHTML=cantidadAccion;
+        document.getElementById("vender").disabled=false;
+    }else{
+      
+        document.getElementById("vender").disabled=true;
+    }
+
+
+}
+function almacenarNombre(){
+    
     arrayViejo=JSON.parse(localStorage.getItem("datosUsu"));
 
     // compruebo si existe usuario
@@ -62,34 +99,11 @@ function almacenarNombre(){
     }
     if(!existeUsuario){
           // Añadir nuevo usuario
-        var usu=JSON.stringify({nombre:document.getElementById("nombre").value, puntos:0});
+        var usu=JSON.stringify({nombre:document.getElementById("nombre").value, puntos:5});
         arrayNuevo=JSON.parse(localStorage.getItem("datosUsu"));
         arrayNuevo.push(JSON.parse(usu) ); 
         localStorage.setItem("datosUsu",JSON.stringify(arrayNuevo));    
     }
-}
-function comprarAccion(){
-
-    capital=capital-accion;
-    cantidadAccion++;
-    document.getElementById("capital").innerHTML=capital;
-    document.getElementById("nAccion").innerHTML=cantidadAccion;
-}
-function venderAccion(){
-    if(naccion>0){
-        nacciones.style.display="none";
-        capital=capital+accion;
-        cantidadAccion--;
-        document.getElementById("capital").innerHTML=capital;
-        document.getElementById("nAccion").innerHTML=cantidadAccion;
-
-    }else if(naccion<=0){
-        nacciones.style.display="block";
-        nacciones.innerHTML="no tienes acciones que vender";
-        nacciones.style.color="red";
-    }
-
-
 }
 
 // ESCRIBIR Y SUS FUNCIONES ////////////////////////////////////////////////
@@ -97,7 +111,8 @@ function escribir(){
     if(capital>0){
         if(m<=1){
             contador();
-
+            
+            document.getElementById("total").innerHTML=capital-1000;
             // comparacion de accion anterio para saber si ha subido o bajado
             if(s%5==0){
                 accionAnterior=accion;
@@ -119,7 +134,7 @@ function escribir(){
             puntoInicial();
         }
     }else{
-        document.getElementById("mensajeFinal").innerHTML=document.getElementById("nombre").value+", te has quedado sin efectivo";
+      
     }
 };
 function contador(){
