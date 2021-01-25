@@ -1,4 +1,9 @@
 window.onload =()=>{
+    
+    // localStorage
+     if(localStorage.datosUsu==undefined){
+         localStorage.setItem("datosUsu",JSON.stringify([]));
+     }
    
     // tiempo 
     m=0;
@@ -20,6 +25,7 @@ window.onload =()=>{
     vender.addEventListener('click',venderAccion,false);
 
     //numero acciones
+    document.getElementById("nAccion").innerHTML=0;
     naccion=document.getElementById("nAccion").innerHTML;
     nacciones=document.getElementById("accionexiste");
 
@@ -33,9 +39,8 @@ window.onload =()=>{
 function cronometrar(){ 
     
     almacenarNombre();
-    var nom=document.getElementById("nombre").value;
-    if(nom.length>0){
-        localStorage.setItem("nombre", document.getElementById("nombre").value);
+     
+    if(document.getElementById("nombre").value.length>0){  
         document.getElementById("empezar").disabled=true;
         escribir();
         id=setInterval(escribir,1000);
@@ -45,11 +50,23 @@ function cronometrar(){
     
 };
 function almacenarNombre(){
-     // localStorage NO ACABADOOOOOOOOOOOOOOOOOOO
-     nom=document.getElementById("nombre").value;
-     var misnombre={nombre:+nom}
-     localStorage.getItem("nombre");
- 
+   
+    arrayViejo=JSON.parse(localStorage.getItem("datosUsu"));
+
+    // compruebo si existe usuario
+    existeUsuario=false;
+    for (x of arrayViejo) {
+        if(x.nombre==document.getElementById("nombre").value){
+            existeUsuario=true; 
+        }
+    }
+    if(!existeUsuario){
+          // Añadir nuevo usuario
+        var usu=JSON.stringify({nombre:document.getElementById("nombre").value, puntos:0});
+        arrayNuevo=JSON.parse(localStorage.getItem("datosUsu"));
+        arrayNuevo.push(JSON.parse(usu) ); 
+        localStorage.setItem("datosUsu",JSON.stringify(arrayNuevo));    
+    }
 }
 function comprarAccion(){
 
