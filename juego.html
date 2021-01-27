@@ -5,17 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" type="styles/juego.css">
+    <link href="styles/juego.css" rel="stylesheet" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 </head>
 <body  onload="recargarHora()">
-    <div class="principal" >
-        <input list="nombres" type="text" id="nombre" placeholder="Ingresa tu nombre">
-        <datalist id="nombres">
-                <option id="localNom"></option>
-        </datalist>
-        <button id="empezar">empezar</button> 
+    <div class="c-principal" id="principal">
+        <div class="infoUsu">
+            <input list="nombres" type="text" id="nombre" placeholder="Nombre">
+            <datalist id="nombres">
+                    <option id="localNom"></option>
+            </datalist>
+            <button id="empezar">empezar</button>
+        </div>
     </div>
-    <div id="cuerpo">
+    <div  class="c-cuerpo" id="cuerpo">
+        
+        <canvas id="myChart" width="200" height="100"></canvas>
+      
         <div class="c-cronometro">
             <div id="tiempo"></div>      
         </div>
@@ -45,7 +51,7 @@
             </div>
         </div>
     </div>
-    <div class="c-final">
+    <div class="c-final" id="final">
         <p id="mensajeFinal"></p>
     </div>
     <script src="js/juego.js"></script>

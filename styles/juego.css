@@ -1,3 +1,79 @@
 body{
-    background: #cccccc;
+    background: #aa7c69;
+    font-size: 20px;
 }
+::placeholder {
+    font-size: 1.5em;
+    text-align: center;
+  }
+.c-cuerpo{
+    display: none;
+}
+.c-final{
+    display: none;
+}
+/* cuando se muestra el inicio */
+.c-principal{
+    display: flex;
+    width: 50%;
+    padding: 20px;
+    background: #aa5a38;
+    margin: auto;
+    border-radius: 5px;
+    margin-top:40vh; 
+}
+.infoUsu{
+ 
+    width: 100%;
+    height: 100%;
+
+}
+.c-principal input{
+    width: 80%;
+    display: flex;
+    margin: auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+
+.c-principal button {
+    font-size: 20px;
+    color: #ffffff;
+    background: #8f3737;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    margin: auto;
+    margin-top: 20px;
+    border: none;
+}
+/* canvas */
+
+canvas{
+    background:rgb(141, 141, 167);
+    color: black;
+}
+
+
+/* cuando se muestra .c-principal */
+.c-cuerpo{
+    width: 100%;
+    background: #aa5a38;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
