@@ -65,10 +65,9 @@ window.onload =()=>{
 };
 function cronometrar(){ 
     // activar contenido CSS
-    document.getElementById("cuerpo").style.setProperty("display", "block");
-    document.getElementById("principal").style.setProperty("display", "none");
+    document.getElementById("cuerpo").classList.add("empiezacuerpo");
+    document.getElementById("principal").classList.add("acabaprincipal");
     
-
     if(document.getElementById("nombre").value.length>0){ 
         almacenarNombre();
         document.getElementById("empezar").disabled=true;
@@ -109,7 +108,9 @@ function venderAccion(){
 
 }
 function almacenarNombre(){
-    
+    usuarioActualJugando=document.getElementById("nombre").value;
+    puntosAnterior=0;
+
     arrayViejo=JSON.parse(localStorage.getItem("datosUsu"));
 
     // compruebo si existe usuario
@@ -117,6 +118,8 @@ function almacenarNombre(){
     for (x of arrayViejo) {
         if(x.nombre==document.getElementById("nombre").value){
             existeUsuario=true; 
+            puntosAnterior=x.puntos;
+            console.log(`puntos anterios: ${puntosAnterior}`);
         }
     }
     if(!existeUsuario){
@@ -127,13 +130,15 @@ function almacenarNombre(){
         localStorage.setItem("datosUsu",JSON.stringify(arrayNuevo));    
     }
 }
+function almacenarPuntos(){
 
+}
 // ESCRIBIR Y SUS FUNCIONES ////////////////////////////////////////////////
 function escribir(){ 
     if(capital>0){
         if(s<=31){
             contador();
-            document.getElementById("total").innerHTML=capital-1000;
+            total.innerHTML=capital-1000;
             // comparacion de accion anterio para saber si ha subido o bajado
             if(s%2==0){
                 accionAnterior=accion;
@@ -153,7 +158,7 @@ function escribir(){
                 document.getElementById("accion").innerHTML=accion;
             } 
         }else{
-            // puntoInicial();
+            puntoInicial();
         }
     }
 };
@@ -207,9 +212,12 @@ function graficaLineal(){
             datasets:[{
                 label:'num datos',
                 data:[a,b,c,d,e,f,g,h,i,j,k,l,m,n,o],
-                // backgroundColor:[
-                //     'rgb(115, 139, 189 )'
-                // ]
+                backgroundColor:[
+                    'orange'
+                ],
+                borderColor:[
+                    'red'
+                ]
             }]
         },
         options:{
@@ -227,10 +235,11 @@ function graficaLineal(){
 }
 function puntoInicial(){
     // tadavia no
-    document.getElementById("final").style.setProperty("display", "block");
-    document.getElementById("cuerpo").style.setProperty("display", "none");
-    document.getElementById("mensajeFinal").innerHTML="Se acabo el tiempo"
+    document.getElementById("cuerpo").classList.add("acabacuerpo");
+    document.getElementById("final").classList.add("empiezafinal");
 
+    mensajePersonalizado();
+    
     clearInterval(id);
     document.getElementById("tiempo").innerHTML="00:00";
     document.getElementById("accion").innerHTML="100";
@@ -239,4 +248,22 @@ function puntoInicial(){
     document.getElementById("total").innerHTML="0";
     document.getElementById("vender").disabled=false;
     document.getElementById("comprar").disabled=false;
+}
+
+
+function mensajePersonalizado(){
+    puntosAnteriorconver=parseFloat(puntosAnterior);
+    totalconver=parseFloat(total);
+    console.log(total);
+    if(totalconver>puntosAnteriorconver){
+        document.getElementById("mensajeFinal").innerHTML="Enhorabuena!!! Has superado tu Record "
+        document.getElementById("oro").classList.add("si-oro");
+    }else if(totalconver==puntosAnteriorconver){
+        document.getElementById("mensajeFinal").innerHTML="Sigues manteniendo tu record"
+        document.getElementById("oro").classList.add("si-oro");
+    }else if(totalconver<puntosAnteriorconver){
+        document.getElementById("mensajeFinal").innerHTML="No has superado tu ultima record"
+    }
+    document.getElementById("mensajeFinal").innerHTML="Se acabo el tiempo"
+
 }

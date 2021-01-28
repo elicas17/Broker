@@ -1,6 +1,8 @@
 body{
     background: #aa7c69;
     font-size: 20px;
+    max-width: 900px;
+    margin: auto;
 }
 ::placeholder {
     font-size: 1.5em;
@@ -52,18 +54,64 @@ body{
 /* canvas */
 
 canvas{
-    background:rgb(141, 141, 167);
-    
+    background:rgb(137, 168, 133);
+  
 }
-
+.c-canvas{
+    padding-top: 20px;
+}
+/* inicio */
+.empiezacuerpo{
+    display: block;
+}
+.acabaprincipal{
+    display: none;
+}
+/* final */
+.acabacuerpo{
+    display: none;
+}
+.empiezafinal{
+    display: block;
+}
+ 
 
 /* cuando se muestra .c-principal */
 .c-cuerpo{
-    width: 100%;
+    width: 90%;
+    margin: auto;
     background: #aa5a38;
     text-align: center;
+    margin-top: 30px;
+    border-radius:5px;
 }
-
+.c-cronometro{
+    position: relative;
+    background: rgb(255, 174, 0);
+    width: 200px;
+    margin-top: 20px;
+}
+.no-oro,.no-bronce{
+    display: none;
+    width: 50%;
+    margin: auto;
+}
+.no-oro img, .no-bronce img{
+     width: 100%;
+     height: auto;
+}
+.si-oro,.si-bronce{
+    display: block;
+    width: 50%;
+    margin: auto;
+}
+.c-final{
+    z-index: 3;
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    background: #8f3737;
+}
 
 
 
