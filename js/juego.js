@@ -1,21 +1,8 @@
 window.onload =()=>{
 
-    a=0;
-    b=0;
-    c=0;
-    d=0;
-    e=0;
-    f=0;
-    g=0;
-    h=0;
-    i=0;
-    j=0;
-    k=0;
-    l=0;
-    m=0;
-    n=0;
-    o=0;
+    a=0; b=0; c=0;d=0;e=0;f=0;g=0;h=0;i=0;j=0;k=0;l=0;p=0;n=0;o=0;
 
+    arrayActual=[];
 
     // localStsrage
      if(localStorage.datosUsu==undefined){
@@ -57,18 +44,22 @@ window.onload =()=>{
     vender.addEventListener('click',venderAccion,false);
     
     //total
-   document.getElementById("total").innerHTML="0";
-   total=document.getElementById("total").innerHTML;
 
+   total=document.getElementById("total");
+    total.innerHTML="0";
     // funciones
 
 };
 function cronometrar(){ 
-    // activar contenido CSS
+
+
+
+    
+    
+    if(document.getElementById("nombre").value.length>0){
+        // activar contenido CSS
     document.getElementById("cuerpo").classList.add("empiezacuerpo");
     document.getElementById("principal").classList.add("acabaprincipal");
-    
-    if(document.getElementById("nombre").value.length>0){ 
         almacenarNombre();
         document.getElementById("empezar").disabled=true;
         escribir();
@@ -82,6 +73,7 @@ function comprarAccion(){
 
     if(capital>0){
         document.getElementById("comprar").disabled=false;
+        document.getElementById("vender").disabled=false;
         capital=capital-accion;
         cantidadAccion++;
         document.getElementById("capital").innerHTML=capital;
@@ -94,12 +86,12 @@ function comprarAccion(){
 function venderAccion(){
 
     if(cantidadAccion>0){
-       
+        document.getElementById("comprar").disabled=false;
+        document.getElementById("vender").disabled=false;
         capital=capital+accion;
         cantidadAccion--;
         document.getElementById("capital").innerHTML=capital;
         document.getElementById("nAccion").innerHTML=cantidadAccion;
-        document.getElementById("vender").disabled=false;
     }else{
       
         document.getElementById("vender").disabled=true;
@@ -112,7 +104,7 @@ function almacenarNombre(){
     puntosAnterior=0;
 
     arrayViejo=JSON.parse(localStorage.getItem("datosUsu"));
-
+    
     // compruebo si existe usuario
     existeUsuario=false;
     for (x of arrayViejo) {
@@ -120,6 +112,7 @@ function almacenarNombre(){
             existeUsuario=true; 
             puntosAnterior=x.puntos;
             console.log(`puntos anterios: ${puntosAnterior}`);
+            arrayActual=arrayViejo;
         }
     }
     if(!existeUsuario){
@@ -127,10 +120,18 @@ function almacenarNombre(){
         var usu=JSON.stringify({nombre:document.getElementById("nombre").value, puntos:0});
         arrayNuevo=JSON.parse(localStorage.getItem("datosUsu"));
         arrayNuevo.push(JSON.parse(usu) ); 
-        localStorage.setItem("datosUsu",JSON.stringify(arrayNuevo));    
+        localStorage.setItem("datosUsu",JSON.stringify(arrayNuevo));  
+        arrayActual=arrayNuevo;  
     }
 }
 function almacenarPuntos(){
+    for (x of arrayActual) {
+        if(x.nombre==document.getElementById("nombre").value){
+            x.puntos=parseInt(total.innerHTML);
+        }
+    }
+    console.log(arrayActual);
+    localStorage.setItem("datosUsu",JSON.stringify(arrayActual)); 
 
 }
 // ESCRIBIR Y SUS FUNCIONES ////////////////////////////////////////////////
@@ -158,6 +159,7 @@ function escribir(){
                 document.getElementById("accion").innerHTML=accion;
             } 
         }else{
+            
             puntoInicial();
         }
     }
@@ -198,9 +200,9 @@ function graficaLineal(){
     if(s==20){ j=accion};
     if(s==22){ k=accion};  
     if(s==24){ l=accion};
-    if(s==26){ m=accion};
-    if(s==28){ n=accion};
-    if(s==30){ o=accion};
+    if(s==26){ n=accion};
+    if(s==28){ o=accion};
+    if(s==30){ p=accion};
     
      
     var ctx = document.getElementById("myChart").getContext("2d");
@@ -211,7 +213,7 @@ function graficaLineal(){
             labels:['seg2','seg4','seg6','seg8','seg10','seg12','seg14','seg16','seg18','seg20','seg22','seg24','seg26','seg28','seg30'],
             datasets:[{
                 label:'num datos',
-                data:[a,b,c,d,e,f,g,h,i,j,k,l,m,n,o],
+                data:[a,b,c,d,e,f,g,h,i,j,k,l,n,o,p],
                 backgroundColor:[
                     'orange'
                 ],
@@ -234,13 +236,14 @@ function graficaLineal(){
 
 }
 function puntoInicial(){
+    clearInterval(id);
+    
     // tadavia no
     document.getElementById("cuerpo").classList.add("acabacuerpo");
     document.getElementById("final").classList.add("empiezafinal");
 
     mensajePersonalizado();
-    
-    clearInterval(id);
+
     document.getElementById("tiempo").innerHTML="00:00";
     document.getElementById("accion").innerHTML="100";
     document.getElementById("capital").innerHTML="1000.00";
@@ -248,22 +251,24 @@ function puntoInicial(){
     document.getElementById("total").innerHTML="0";
     document.getElementById("vender").disabled=false;
     document.getElementById("comprar").disabled=false;
-}
-
-
+} 
 function mensajePersonalizado(){
-    puntosAnteriorconver=parseFloat(puntosAnterior);
-    totalconver=parseFloat(total);
-    console.log(total);
+    imgfinal=document.getElementById("imgFinal");
+
+    puntosAnteriorconver=parseInt(puntosAnterior);
+    totalconver=parseInt(total.innerHTML);
+    console.log(puntosAnteriorconver);
+    console.log(totalconver);
     if(totalconver>puntosAnteriorconver){
-        document.getElementById("mensajeFinal").innerHTML="Enhorabuena!!! Has superado tu Record "
-        document.getElementById("oro").classList.add("si-oro");
+        almacenarPuntos();
+        document.getElementById("mensajeFinal").innerHTML="Enhorabuena!!! Has superado tu Record ";
+        imgfinal.src="images/oro.png";
     }else if(totalconver==puntosAnteriorconver){
-        document.getElementById("mensajeFinal").innerHTML="Sigues manteniendo tu record"
-        document.getElementById("oro").classList.add("si-oro");
+        document.getElementById("mensajeFinal").innerHTML="Sigues manteniendo tu record";
+        imgfinal.src="images/pulgar-arriba.png";
     }else if(totalconver<puntosAnteriorconver){
-        document.getElementById("mensajeFinal").innerHTML="No has superado tu ultima record"
+        document.getElementById("mensajeFinal").innerHTML="No has superado tu ultimo record";
+        imgfinal.src="images/bronce.png";
     }
-    document.getElementById("mensajeFinal").innerHTML="Se acabo el tiempo"
 
 }

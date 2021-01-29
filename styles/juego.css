@@ -91,34 +91,50 @@ canvas{
     width: 200px;
     margin-top: 20px;
 }
-.no-oro,.no-bronce{
-    display: none;
-    width: 50%;
-    margin: auto;
-}
-.no-oro img, .no-bronce img{
-     width: 100%;
-     height: auto;
-}
-.si-oro,.si-bronce{
-    display: block;
-    width: 50%;
-    margin: auto;
-}
+
+
 .c-final{
-    z-index: 3;
-    position: absolute;
-    z-index: 3;
     width: 100%;
     background: #8f3737;
+    margin-top: 200px;
+}
+.c-final p{
+    width: 80%;
+    text-align: center;
+    margin: auto;
+    padding: 60px;
+}
+.c-img{
+    width: 50%;
+    margin: auto;
+    
+}
+.c-img img{
+    width: 100%; 
 }
 
 
+.c-usuario button{
+    background: #8f3737;
+    padding: 10px;
+    border-radius: 10px;
+    border-color: rgb(255, 174, 0);
+    margin-bottom: 20px;
+}
+.c-usuario button:hover{
+    border-color: #8f3737; 
+    background: rgb(255, 174, 0);
+}
 
-
-
-
-
+@media only screen and (max-width: 400px) {
+    body{
+        width: 100%;
+        font-size: 17px;
+    }
+    .c-cuerpo{
+        width: 100%
+    }
+}
 
 
 
